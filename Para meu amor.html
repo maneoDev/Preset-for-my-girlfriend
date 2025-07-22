@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Surpresa para Você</title>
+
+    <style>
+        /* Importa uma fonte cursiva bonita para a carta */
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+        body {
+            /* Fundo rosa claro */
+            background-color: #e392ae;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            /* Centraliza tudo na tela */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            /* Aumentei um pouco a área para o texto caber melhor */
+            width: 320px;
+            height: 240px;
+        }
+
+        /* --- ESTILO DO ENVELOPE --- */
+        #envelope {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            /* Animação suave (transição) */
+            transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+        }
+
+        #envelope img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Garante que a imagem caiba sem distorcer */
+        }
+
+        /* --- ESTILO DA CARTA --- */
+        #carta {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
+            /* background-color: white;  <-- REMOVIDO para que a imagem de fundo apareça */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+
+            /* Começa invisível e menor */
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.5);
+            /* Animação suave com um pequeno atraso para esperar o envelope sumir */
+            transition: opacity 0.7s ease-in-out 0.5s, transform 0.7s ease-in-out 0.5s, visibility 0s 1.2s;
+        }
+        
+        /* Imagem de fundo opcional para o papel */
+        .fundo-papel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem cobrir todo o espaço */
+            z-index: -1; /* Fica atrás do texto */
+            border-radius: 8px;
+            opacity: 1; /* Opacidade normal para a imagem de fundo */
+        }
+
+        .texto-carta {
+            color: #333;
+            /* AJUSTADO */
+            line-height: 1.4; 
+            height: 100%;
+            overflow: auto; /* Adiciona scroll se o texto for muito grande */
+        }
+
+        .texto-carta h1 {
+            font-family: 'Dancing Script', cursive;
+            /* AJUSTADO */
+            font-size: 2em; 
+            color: #d6336c; /* Um tom de rosa mais forte */
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .texto-carta p {
+            /* AJUSTADO */
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .assinatura {
+            text-align: right;
+            font-style: italic;
+            /* AJUSTADO */
+            margin-top: 10px;
+        }
+
+        /* --- ANIMAÇÕES (quando a classe 'aberto' é adicionada via JS) --- */
+        .container.aberto #envelope {
+            opacity: 0;
+            transform: scale(1.2);
+        }
+
+        .container.aberto #carta {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+            transition-delay: 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="envelope">
+            <img src="Carta.png" alt="Um envelope fechado">
+        </div>
+
+        <div id="carta">
+            <img class="fundo-papel" src="papel amassado.png" alt="Fundo do papel de carta">
+            
+            <div class="texto-carta">
+                <h1>Meu Amor,</h1>
+                <p>
+                    Hoje, eu só queria te lembrar do quão incrível você é e do quanto eu sou feliz por ter você ao meu lado. Cada dia contigo é uma nova descoberta, um novo sorriso, um novo motivo para agradecer.
+                </p>
+                <p>
+                    Você ilumina meus dias e transforma momentos simples em memórias inesquecíveis. Espero que este pequeno gesto possa trazer um sorriso ao seu rosto, assim como você sempre traz ao meu.
+                </p>
+                <p class="assinatura">
+                    Com todo o meu amor,<br>
+                    Emanuel
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const envelope = document.getElementById('envelope');
+            const container = document.querySelector('.container');
+
+            envelope.addEventListener('click', function() {
+                container.classList.add('aberto');
+            });
+        });
+    </script>
+
+</body>
+</html>
